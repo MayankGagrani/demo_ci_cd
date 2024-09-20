@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       
       - name: Deploy
         uses: easingthemes/ssh-deploy@main
@@ -21,7 +21,7 @@ jobs:
           TARGET: ${{secrets.TARGET_DIR}}
 
       - name: Executing remotes ssh command from ssh key
-        uses: appleboy/ssh-deploy@master
+        uses: appleboy/ssh-action@master
         with:
           key: ${{secrets.SSH_EC2_KEY}}
           host: ${{secrets.HOST_DNS}}
