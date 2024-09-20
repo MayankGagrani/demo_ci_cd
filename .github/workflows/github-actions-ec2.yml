@@ -1,4 +1,4 @@
-name: Distribute to Heroku
+name: Push to ec2
 
 on:
   push:
