@@ -1,0 +1,35 @@
+name: Distribute to Heroku
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{secrets.SSH_EC2_KEY}}
+          REMOTE_HOST: ${{secrets.HOST_DNS}}
+          REMOTE_USER: ${{secrets.USERNAME}}
+          TARGET: ${{secrets.TARGET_DIR}}
+
+      - name: Executing remotes ssh command from ssh key
+        uses: akhileshns/ssh-deploy@master
+        with:
+          key: ${{secrets.SSH_EC2_KEY}}
+          host: ${{secrets.HOST_DNS}}
+          username: ${{secrets.USERNAME}}
+          script: |
+          sudo yum update –y
+          sudo yum install apache2 -y
+          sudo systemctl start apache2
+          cd home
+          sudo mv * /var/www/html
+          
