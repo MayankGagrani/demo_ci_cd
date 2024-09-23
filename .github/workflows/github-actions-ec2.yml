@@ -15,7 +15,7 @@ jobs:
       - name: Deploy
         uses: easingthemes/ssh-deploy@main
         env:
-          SSH_PRIVATE_KEY: ${{secrets.SSH_EC2_KEY}}
+          SSH_PRIVATE_KEY: ${{secrets.EC2_SSH_KEY}}
           REMOTE_HOST: ${{secrets.HOST_DNS}}
           REMOTE_USER: ${{secrets.USERNAME}}
           TARGET: ${{secrets.TARGET_DIR}}
@@ -23,7 +23,7 @@ jobs:
       - name: Executing remotes ssh command from ssh key
         uses: appleboy/ssh-action@master
         with:
-          key: ${{secrets.SSH_EC2_KEY}}
+          key: ${{secrets.EC2_SSH_KEY}}
           host: ${{secrets.HOST_DNS}}
           username: ${{secrets.USERNAME}}
           script: |
