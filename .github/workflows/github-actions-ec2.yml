@@ -26,10 +26,6 @@ jobs:
           key: ${{secrets.EC2_SSH_KEY}}
           host: ${{secrets.HOST_DNS}}
           username: ${{secrets.USERNAME}}
-          script: |
-           sudo yum update –y
-           sudo yum install apache2 -y
-           sudo systemctl start apache2
-           cd home
-           sudo mv * /var/www/html
+          
+          
           
